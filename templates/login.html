@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>School Bank</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1f2933" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/static/manifest.json" />
+
+    <!-- iOS support -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="School Bank" />
+    <link rel="apple-touch-icon" href="/static/icon-192.png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background: radial-gradient(circle at top, #1f2933, #0b0f14);
+            min-height: 100vh;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .glass-soft {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .shadow-soft {
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .fluid-title {
+            font-size: clamp(1.5rem, 6vw, 2rem);
+        }
+
+        .fluid-base {
+            font-size: clamp(0.875rem, 3.5vw, 1rem);
+        }
+    </style>
+</head>
+
+<body class="text-white flex items-center justify-center px-4">
+
+    <div class="w-full max-w-[420px]">
+
+        <!-- APP TITLE -->
+        <div class="text-center mb-8">
+            <h1 class="fluid-title font-semibold tracking-tight">School Bank</h1>
+            <p class="text-white/50 fluid-base mt-1">Secure student banking</p>
+        </div>
+
+        <!-- LOGIN CARD -->
+        <div class="glass shadow-soft rounded-3xl p-6">
+            <form method="post" class="space-y-4">
+
+                <div>
+                    <label class="block text-white/60 text-sm mb-1">Username</label>
+                    <input
+                        name="username"
+                        required
+                        placeholder="Enter your username"
+                        class="w-full glass-soft border border-white/10 px-4 py-3 rounded-xl
+                               focus:outline-none focus:border-white/30 transition"
+                    />
+                </div>
+
+                <div>
+                    <label class="block text-white/60 text-sm mb-1">Password</label>
+                    <input
+                        name="password"
+                        type="password"
+                        required
+                        placeholder="••••••••"
+                        class="w-full glass-soft border border-white/10 px-4 py-3 rounded-xl
+                               focus:outline-none focus:border-white/30 transition"
+                    />
+                </div>
+
+                <button
+                    class="w-full mt-2 py-3 rounded-xl font-semibold
+                           bg-white text-black hover:bg-white/90 active:scale-95 transition"
+                >
+                    Sign in
+                </button>
+            </form>
+
+            {% if error %}
+            <p class="text-red-400 text-center mt-4 fluid-base">{{ error }}</p>
+            {% endif %}
+        </div>
+
+        <!-- FOOTER -->
+        <p class="text-center text-sm text-white/50 mt-6">
+            New user?
+            <a href="/signup" class="underline hover:text-white transition">Create account</a>
+        </p>
+
+    </div>
+
+    <!-- SERVICE WORKER -->
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("/static/sw.js")
+                    .then(() => console.log("✅ Service Worker registered"))
+                    .catch(err => console.error("❌ SW failed:", err));
+            });
+        }
+    </script>
+
+</body>
+</html>

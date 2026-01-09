@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transactions • School Bank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background: radial-gradient(circle at top, #1f2933, #0b0f14);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .glass-soft {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .shadow-soft {
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .fluid-title {
+            font-size: clamp(1.25rem, 5vw, 1.75rem);
+        }
+
+        .fluid-base {
+            font-size: clamp(0.875rem, 3.5vw, 1rem);
+        }
+
+        .fluid-sm {
+            font-size: clamp(0.75rem, 3vw, 0.875rem);
+        }
+    </style>
+</head>
+
+<body class="text-white">
+
+<!-- PAGE WRAPPER -->
+<div class="w-full min-h-screen flex justify-center px-3 py-6">
+    <div class="w-full max-w-[520px]">
+
+        <!-- HEADER -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <p class="text-white/50 fluid-sm">History</p>
+                <h1 class="fluid-title font-semibold">Transactions</h1>
+            </div>
+            <a href="/dashboard" class="glass rounded-full px-3 py-2 text-sm hover:bg-white/10 transition">
+                ← Back
+            </a>
+        </div>
+
+        <!-- TRANSACTION LIST -->
+        <div class="glass shadow-soft rounded-3xl p-4">
+
+            {% if transactions %}
+            <div class="space-y-3">
+                {% for t in transactions %}
+                <div class="glass-soft rounded-2xl px-4 py-3 flex items-center justify-between">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm
+                            {% if t[0] == session['user'] %}bg-red-400/20 text-red-300{% else %}bg-green-400/20 text-green-300{% endif %}">
+                            {% if t[0] == session['user'] %}↑{% else %}↓{% endif %}
+                        </div>
+
+                        <div class="min-w-0">
+                            <p class="fluid-base truncate">
+                                {% if t[0] == session['user'] %}
+                                    Sent to {{ t[1] }}
+                                {% else %}
+                                    Received from {{ t[0] }}
+                                {% endif %}
+                            </p>
+                            <p class="fluid-sm text-white/40 truncate">{{ t[3] }}</p>
+                        </div>
+                    </div>
+
+                    <div class="ml-3 font-medium fluid-base
+                        {% if t[0] == session['user'] %}text-red-400{% else %}text-green-400{% endif %}">
+                        {% if t[0] == session['user'] %}-{% else %}+{% endif %}${{ t[2] }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-12 text-white/50 fluid-base">
+                No transactions yet
+            </div>
+            {% endif %}
+
+        </div>
+
+        <!-- BOTTOM NAV -->
+        <div class="glass fixed bottom-4 left-1/2 -translate-x-1/2 w-[92%] max-w-[420px]
+                    rounded-2xl py-2 flex justify-around items-center">
+            <a href="/dashboard" class="text-lg p-3 rounded-xl hover:bg-white/5 transition">🏠</a>
+            <a href="/transactions" class="text-lg p-3 rounded-xl bg-white/10">📊</a>
+            <a href="/logout" class="text-lg p-3 rounded-xl hover:bg-white/5 transition">🚪</a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

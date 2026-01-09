@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Top Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center">
+
+<div class="bg-white w-full max-w-md p-8 rounded-xl shadow-lg">
+  <h2 class="text-xl font-bold mb-4">Top Up Account</h2>
+
+  <p class="text-gray-600">Account</p>
+  <p class="font-mono mb-2">{{ acc[0] }}</p>
+
+  <p class="text-gray-600">Current Balance</p>
+  <p class="text-2xl text-green-600 mb-4">${{ acc[1] }}</p>
+
+  <form method="post" class="space-y-4">
+    <input name="amount" type="number" step="0.01"
+      placeholder="Top up amount"
+      class="w-full border p-3 rounded">
+
+    <button class="w-full bg-green-600 text-white p-3 rounded hover:bg-green-700">
+      Confirm Top Up
+    </button>
+  </form>
+
+  {% if msg %}
+    <p class="text-center text-green-600 mt-4">{{ msg }}</p>
+  {% endif %}
+
+  <a href="/admin" class="block text-center mt-6 text-blue-600">← Back</a>
+</div>
+
+</body>
+</html>

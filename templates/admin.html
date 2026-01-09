@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-white min-h-screen p-6">
+
+<h1 class="text-2xl font-semibold mb-6">Admin Panel</h1>
+
+<div class="space-y-4">
+{% for u in users %}
+  <div class="bg-white/10 backdrop-blur-xl rounded-2xl p-4 flex justify-between items-center">
+    <div>
+      <p class="font-medium">{{ u[0] }}</p>
+      <p class="text-xs text-white/40 font-mono">{{ u[1] }}</p>
+      <p class="text-green-400">${{ u[2] }}</p>
+    </div>
+    <a href="/topup/{{ u[1] }}"
+       class="bg-white text-black px-4 py-2 rounded-xl text-sm">
+      Top Up
+    </a>
+  </div>
+{% endfor %}
+</div>
+
+</body>
+</html>
