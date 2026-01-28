@@ -20,7 +20,8 @@ This project is suitable for **school projects, learning purposes, or small inte
 
 ## 🛠️ Technologies Used
 
-- Language: *HTML, CSS & JavaScript*  
+- Frontend: *HTML, CSS & JavaScript*
+- Backend: *Python*
 - Storage: *SQLite*  
 - Platform: *Web*
 
@@ -32,7 +33,7 @@ This project is suitable for **school projects, learning purposes, or small inte
 
 ### Prerequisites
 Make sure you have:
-- Required runtime (e.g. Python / Node.js)
+- Required runtime Python
 - Basic understanding of the language used
 
 ### Installation
