@@ -25,8 +25,6 @@ This project is suitable for **school projects, learning purposes, or small inte
 - **Storage:** SQLite
 - **Platform:** Web
 
-> Update this section based on the technologies your project actually uses.
-
 ---
 
 ## 🚀 Getting Started
